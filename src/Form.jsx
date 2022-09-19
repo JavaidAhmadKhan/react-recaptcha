@@ -1,12 +1,18 @@
-import ReCAPTCHA from "react-google-recaptcha";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import Reaptcha from "reaptcha";
 
 const Form = () => {
+  const [captchaToken, setCaptchaToken] = useState(null);
   const captchaRef = useRef(null);
+
+  const verify = () => {
+    captchaRef.current.getResponse().then((res) => {
+      setCaptchaToken(res);
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const token = captchaRef.current.getValue();
     captchaRef.current.reset();
   };
 
@@ -15,9 +21,10 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input type="text" id="name" className="input" />
-        <ReCAPTCHA
+        <Reaptcha
           sitekey={process.env.REACT_APP_SITE_KEY}
           ref={captchaRef}
+          onVerify={verify}
         />
         <button>Submit</button>
       </form>
