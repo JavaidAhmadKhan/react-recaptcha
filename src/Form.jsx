@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import Reaptcha from "reaptcha";
+const axios = require("axios");
 
 const Form = () => {
   const [captchaToken, setCaptchaToken] = useState(null);
@@ -11,10 +12,18 @@ const Form = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) =>{
     e.preventDefault();
+
+    const token = captchaRef.current.getValue();
     captchaRef.current.reset();
-  };
+
+    await axios.post(process.env.REACT_APP_SITE_KEY, {token})
+    .then(res =>  console.log(res))
+    .catch((error) => {
+    console.log(error);
+    })
+}
 
   return (
     <div className="container">
