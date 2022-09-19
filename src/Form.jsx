@@ -15,8 +15,8 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input type="text" id="name" className="input" />
-        <ReCAPTCHA sitekeysitekey="6Lf95w0iAAAAAELzF43zhUwWH05dp7BGHCKoUJ-Q" />
-        <button>Submit</button>
+        <ReCAPTCHA sitekey="6Lf95w0iAAAAAELzF43zhUwWH05dp7BGHCKoUJ-Q" />
+        <button>Submit</button  >
       </form>
     </div>
   );
